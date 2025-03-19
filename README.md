@@ -45,4 +45,5 @@ For example:
 To start any environment, navigate to the corresponding directory and run the following command:
 
 ```bash
-docker-compose -f <file_name>.yml up
+docker-compose -f <file_name>.yml up -d
+```
