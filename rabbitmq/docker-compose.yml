@@ -3,8 +3,8 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"     # Porta para o protocolo AMQP
-      - "15672:15672"   # Porta para acessar a interface de gerenciamento no navegador
+      - "5672:5672"   # AMQP Port
+      - "15672:15672" # Web Management Port
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: password
