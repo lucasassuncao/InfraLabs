@@ -31,9 +31,9 @@ lucas@Milkyway:/mnt/d/Projects/InfraLabs$ tree
 ├── lamp
 │   ├── Dockerfile
 │   └── docker-compose.yml
-├── lgtm
-│   └── docker-compose.yml
 ├── mysql
+│   └── docker-compose.yml
+├── otel-lgtm
 │   └── docker-compose.yml
 ├── rabbitmq
 │   └── docker-compose.yml
