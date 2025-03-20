@@ -1,0 +1,20 @@
+services:
+  splunk:
+    image: splunk/splunk:latest
+    container_name: splunk
+    ports:
+      - "8000:8000" # Web Interface
+      - "8088:8088" # HTTP Event Collector (HEC)
+      - "8089:8089" # Management API
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_USER=admin
+      - SPLUNK_PASSWORD=changeme
+      - SPLUNK_ENABLE_LISTEN=9997 # Port to receive splunk forwarder logs
+      - SPLUNK_ENABLE_WEB=true
+    volumes:
+      - splunk_data:/opt/splunk/var
+    restart: unless-stopped
+
+volumes:
+  splunk_data:

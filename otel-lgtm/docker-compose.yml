@@ -1,0 +1,14 @@
+services:
+  grafana-otel-lgtm:
+    image: grafana/otel-lgtm
+    container_name: grafana-otel-lgtm
+    ports:
+      - "3000:3000"  # Grafana Port
+      - "4317:4317"  # OpenTelemetry (OTLP gRPC) Port
+      - "4318:4318"  # OpenTelemetry (OTLP HTTP) Port
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # Grafana Admin Password
+    restart: unless-stopped  # Restart container if it fails
+    # If you want to map local configuration files to the container, uncomment the following lines
+    # volumes:
+    #   - ./config:/etc/grafana/provisioning  

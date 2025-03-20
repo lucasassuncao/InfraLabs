@@ -17,26 +17,40 @@ The project contains multiple `docker-compose.yml` files, each corresponding to 
 For example:
 
 ```
+lucas@Milkyway:/mnt/d/Projects/InfraLabs$ tree
+.
 ├── README.md
+├── elk
+│   ├── README.md
+│   ├── docker-compose.yml
+│   └── logstash.conf
 ├── kafka
-│   └── docker-compose.yml
+│   └── docker-compose.yml
 ├── kong
-│   └── docker-compose.yml
+│   └── docker-compose.yml
 ├── lamp
-│   ├── Dockerfile
-│   ├── docker-compose.yml
-│   └── wordpress
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── lgtm
+│   └── docker-compose.yml
 ├── mysql
-│   └── docker-compose.yml
-└── rabbitmq
+│   └── docker-compose.yml
+├── rabbitmq
+│   └── docker-compose.yml
+└── splunk
+    ├── README.md
     └── docker-compose.yml
+
 ```
 
-- **kafka:** Sets up a Kafka environment using Docker. This setup includes Kafka brokers, Zookeeper and Kafdrop to allow you to test message streaming and event-driven architectures.
-- **kong:** Sets up a Kong API Gateway using Docker. This setup includes Kong and Konga to help you manage APIs, handle rate limiting, authentication, and other API-related functionalities.
-- **lamp:** Sets up a classic LAMP (Linux, Apache, MySQL, PHP) stack using Docker. This is for running WordPress locally for example.
-- **mysql:** Sets up a MySQL + PHPMyAdmin environment using Docker. It's ideal for local testing with databases that don't require a complex setup.
-- **rabbitmq:** Sets up RabbitMQ, a widely used message broker, to help you test and work with messaging queues in a Dockerized environment.
+- **kafka:** Sets up a Kafka. This setup includes Kafka brokers, Zookeeper and Kafdrop.
+- **kong:** Sets up a Kong API Gateway. This setup includes Kong and Konga.
+- **lamp:** Sets up a classic LAMP (Linux, Apache, MySQL, PHP) stack.
+- **mysql:** Sets up a MySQL + PHPMyAdmin.
+- **rabbitmq:** Sets up RabbitMQ.
+- **elk:** Sets up an ELK (ElasticSearch, Logstash and Kibana) stack.
+- **splunk:** Sets up a Splunk instance (without forwarders).
+- **otel-lgtm:** Sets up a LGTM (Loki, Grafana, Tempo and Mimir) stack along with OpenTelemetry (OTel).
 
 ## How to Use
 
