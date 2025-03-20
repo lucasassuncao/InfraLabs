@@ -17,7 +17,6 @@ The project contains multiple `docker-compose.yml` files, each corresponding to 
 For example:
 
 ```
-lucas@Milkyway:/mnt/d/Projects/InfraLabs$ tree
 .
 ├── README.md
 ├── elk
@@ -37,20 +36,23 @@ lucas@Milkyway:/mnt/d/Projects/InfraLabs$ tree
 │   └── docker-compose.yml
 ├── rabbitmq
 │   └── docker-compose.yml
-└── splunk
-    ├── README.md
+├── splunk
+│   ├── README.md
+│   └── docker-compose.yml
+└── vault
     └── docker-compose.yml
 
 ```
 
+- **elk:** Sets up an ELK (ElasticSearch, Logstash and Kibana) stack.
 - **kafka:** Sets up a Kafka. This setup includes Kafka brokers, Zookeeper and Kafdrop.
 - **kong:** Sets up a Kong API Gateway. This setup includes Kong and Konga.
 - **lamp:** Sets up a classic LAMP (Linux, Apache, MySQL, PHP) stack.
 - **mysql:** Sets up a MySQL + PHPMyAdmin.
-- **rabbitmq:** Sets up RabbitMQ.
-- **elk:** Sets up an ELK (ElasticSearch, Logstash and Kibana) stack.
-- **splunk:** Sets up a Splunk instance (without forwarders).
 - **otel-lgtm:** Sets up a LGTM (Loki, Grafana, Tempo and Mimir) stack along with OpenTelemetry (OTel).
+- **rabbitmq:** Sets up RabbitMQ.
+- **splunk:** Sets up a Splunk instance (without forwarders).
+- **vault:** Sets up Hashicorp Vault
 
 ## How to Use
 
