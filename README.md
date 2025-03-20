@@ -16,40 +16,13 @@ The project contains multiple `docker-compose.yml` files, each corresponding to 
 
 For example:
 
-```
-.
-├── README.md
-├── elk
-│   ├── README.md
-│   ├── docker-compose.yml
-│   └── logstash.conf
-├── kafka
-│   └── docker-compose.yml
-├── kong
-│   └── docker-compose.yml
-├── lamp
-│   ├── Dockerfile
-│   └── docker-compose.yml
-├── mysql
-│   └── docker-compose.yml
-├── otel-lgtm
-│   └── docker-compose.yml
-├── rabbitmq
-│   └── docker-compose.yml
-├── splunk
-│   ├── README.md
-│   └── docker-compose.yml
-└── vault
-    └── docker-compose.yml
-
-```
-
 - **elk:** Sets up an ELK (ElasticSearch, Logstash and Kibana) stack.
 - **kafka:** Sets up a Kafka. This setup includes Kafka brokers, Zookeeper and Kafdrop.
 - **kong:** Sets up a Kong API Gateway. This setup includes Kong and Konga.
 - **lamp:** Sets up a classic LAMP (Linux, Apache, MySQL, PHP) stack.
 - **mysql:** Sets up a MySQL + PHPMyAdmin.
 - **otel-lgtm:** Sets up a LGTM (Loki, Grafana, Tempo and Mimir) stack along with OpenTelemetry (OTel).
+- **prometheus-grafana:** Sets up Grafana + Prometheus (to be used as a Data Source)
 - **rabbitmq:** Sets up RabbitMQ.
 - **splunk:** Sets up a Splunk instance (without forwarders).
 - **vault:** Sets up Hashicorp Vault
