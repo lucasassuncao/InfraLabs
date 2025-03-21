@@ -16,17 +16,18 @@ The project contains multiple `docker-compose.yml` files, each corresponding to 
 
 For example:
 
-- **elk:** Sets up an ELK (ElasticSearch, Logstash and Kibana) stack.
-- **kafka:** Sets up a Kafka. This setup includes Kafka brokers, Zookeeper and Kafdrop.
-- **kong:** Sets up a Kong API Gateway. This setup includes Kong and Konga.
-- **lamp:** Sets up a classic LAMP (Linux, Apache, MySQL, PHP) stack.
-- **mysql:** Sets up a MySQL + PHPMyAdmin.
-- **otel-lgtm:** Sets up a LGTM (Loki, Grafana, Tempo and Mimir) stack along with OpenTelemetry (OTel).
-- **postgresql:** Sets up PostgreSQL and pgAdmin
-- **prometheus-grafana:** Sets up Grafana + Prometheus (to be used as a Data Source)
-- **rabbitmq:** Sets up RabbitMQ.
-- **splunk:** Sets up a Splunk instance (without forwarders).
-- **vault:** Sets up Hashicorp Vault
+- elk: Deploys an ELK stack (Elasticsearch, Logstash, and Kibana).
+- kafka: Deploys Kafka with brokers, Zookeeper, and Kafdrop.
+- kong: Deploys Kong API Gateway with Konga.
+- lamp: Deploys a LAMP stack (Linux, Apache, MySQL, PHP).
+- mysql: Deploys MySQL with phpMyAdmin.
+- opensearch: Deploys OpenSearch, OpenSearch Dashboards, and Data Prepper.
+- otel-lgtm: Deploys an LGTM stack (Loki, Grafana, Tempo, Mimir) with OpenTelemetry.
+- postgresql: Deploys PostgreSQL with pgAdmin.
+- prometheus-grafana: Deploys Grafana with Prometheus as a data source.
+- rabbitmq: Deploys RabbitMQ.
+- splunk: Deploys Splunk (without forwarders).
+- vault: Deploys HashiCorp Vault.
 
 ## How to Use
 
