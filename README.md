@@ -20,6 +20,7 @@ For example:
 - kafka: Deploys Kafka with brokers, Zookeeper, and Kafdrop.
 - kong: Deploys Kong API Gateway with Konga.
 - lamp: Deploys a LAMP stack (Linux, Apache, MySQL, PHP).
+- mariadb: Deploys MariaDB with phpMyAdmin.
 - mysql: Deploys MySQL with phpMyAdmin.
 - otel-lgtm: Deploys an LGTM stack (Loki, Grafana, Tempo, Mimir) with OpenTelemetry.
 - postgresql: Deploys PostgreSQL with pgAdmin.

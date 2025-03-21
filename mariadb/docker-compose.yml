@@ -1,33 +1,37 @@
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql_db
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: lab_mysql
+      MYSQL_DATABASE: lab_mariadb
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
-      - my_network
+      - mariadb_network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.2.2
     container_name: phpmyadmin
+    restart: unless-stopped
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mariadb
       PMA_USER: root
       PMA_PASSWORD: root
     ports:
       - "8080:80"
+    depends_on:
+      - mariadb
     networks:
-      - my_network
+      - mariadb_network
 
 volumes:
-  mysql_data:
+  mariadb_data:
 
 networks:
-  my_network:
+  mariadb_network:

@@ -1,7 +1,7 @@
 services:
-  grafana-otel-lgtm:
-    image: grafana/otel-lgtm
-    container_name: grafana-otel-lgtm
+  otel-lgtm:
+    image: grafana/otel-lgtm:0.9.1
+    container_name: otel-lgtm
     ports:
       - "3000:3000"  # Grafana Port
       - "4317:4317"  # OpenTelemetry (OTLP gRPC) Port
