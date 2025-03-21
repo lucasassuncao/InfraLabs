@@ -22,6 +22,7 @@ For example:
 - **lamp:** Sets up a classic LAMP (Linux, Apache, MySQL, PHP) stack.
 - **mysql:** Sets up a MySQL + PHPMyAdmin.
 - **otel-lgtm:** Sets up a LGTM (Loki, Grafana, Tempo and Mimir) stack along with OpenTelemetry (OTel).
+- **postgresql:** Sets up PostgreSQL and pgAdmin
 - **prometheus-grafana:** Sets up Grafana + Prometheus (to be used as a Data Source)
 - **rabbitmq:** Sets up RabbitMQ.
 - **splunk:** Sets up a Splunk instance (without forwarders).
