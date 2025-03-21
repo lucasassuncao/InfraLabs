@@ -26,6 +26,7 @@ For example:
 - postgresql: Deploys PostgreSQL with pgAdmin.
 - prometheus-grafana: Deploys Grafana with Prometheus as a data source.
 - rabbitmq: Deploys RabbitMQ.
+- redis:  Deploys Redis with Redis Insight.
 - splunk: Deploys Splunk (without forwarders).
 - vault: Deploys HashiCorp Vault.
 
