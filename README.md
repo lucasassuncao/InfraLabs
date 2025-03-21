@@ -21,7 +21,6 @@ For example:
 - kong: Deploys Kong API Gateway with Konga.
 - lamp: Deploys a LAMP stack (Linux, Apache, MySQL, PHP).
 - mysql: Deploys MySQL with phpMyAdmin.
-- opensearch: Deploys OpenSearch, OpenSearch Dashboards, and Data Prepper.
 - otel-lgtm: Deploys an LGTM stack (Loki, Grafana, Tempo, Mimir) with OpenTelemetry.
 - postgresql: Deploys PostgreSQL with pgAdmin.
 - prometheus-grafana: Deploys Grafana with Prometheus as a data source.
