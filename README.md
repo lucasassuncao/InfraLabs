@@ -18,6 +18,7 @@ For example:
 
 - elk: Deploys an ELK stack (Elasticsearch, Logstash, and Kibana).
 - kafka: Deploys Kafka with brokers, Zookeeper, and Kafdrop.
+- kafka-postgresql: Deploys Kafka with brokers, Zookeeper, Kafka UI, PostgreSQL and pgAdmin
 - kong: Deploys Kong API Gateway with Konga.
 - lamp: Deploys a LAMP stack (Linux, Apache, MySQL, PHP).
 - mariadb: Deploys MariaDB with phpMyAdmin.
