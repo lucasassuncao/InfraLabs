@@ -2,6 +2,7 @@ services:
   splunk:
     image: splunk/splunk:latest
     container_name: splunk
+    restart: unless-stopped
     ports:
       - "8000:8000" # Web Interface
       - "8088:8088" # HTTP Event Collector (HEC)
@@ -14,7 +15,6 @@ services:
       - SPLUNK_ENABLE_WEB=true
     volumes:
       - splunk_data:/opt/splunk/var
-    restart: unless-stopped
 
 volumes:
   splunk_data:
