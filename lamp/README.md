@@ -12,19 +12,19 @@ This is a simple guide to run a LAMP (Linux, Apache, MySQL, PHP) stack with Word
 
 **MySQL:**
 - Root User:
-  - Username: root
-  - Password: root
+  - Username: `root`
+  - Password: `root`
 - WordPress User:
-  - Username: wp_user
-  - Password: wp_pass
-- Default Database: wordpress
-- Port: 3306
+  - Username: `wp_user`
+  - Password: `wp_pass`
+- Default Database: `wordpress`
+- Port: `3306`
 
 **phpMyAdmin:**
 - URL: http://localhost:8081
 - Login with MySQL credentials:
-  - Username: root
-  - Password: root
+  - Username: `root`
+  - Password: `root`
 
 **WordPress:**
 - URL: http://localhost:8080
@@ -38,25 +38,22 @@ This is a simple guide to run a LAMP (Linux, Apache, MySQL, PHP) stack with Word
 
 3. **Start the services:**
 
-```bash
-docker-compose up -d
-```
+   ```bash
+   docker-compose up -d
+   ```
 
 4. **Access WordPress:**
-   
-   Open your browser and go to: http://localhost:8080
-   
-   Follow the WordPress installation wizard to complete the setup.
+   - Open your browser and go to: http://localhost:8080
+   - Follow the WordPress installation wizard to complete the setup.
 
 5. **Access phpMyAdmin:**
-   
-   Open your browser and go to: http://localhost:8081
+   - Open your browser and go to: http://localhost:8081
 
 6. **Stop the services:**
 
-```bash
-docker-compose down
-```
+   ```bash
+   docker-compose down
+   ```
 
 ## Data Persistence
 

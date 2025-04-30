@@ -2,6 +2,7 @@ services:
   kong-db:
     image: postgres:13
     container_name: kong-db
+    restart: on-failure
     environment:
       POSTGRES_USER: kong
       POSTGRES_DB: kong
@@ -12,6 +13,7 @@ services:
   kong-migrations:
     image: kong:latest
     container_name: kong-migrations
+    restart: on-failure
     depends_on:
       - kong-db
     environment:
@@ -21,11 +23,11 @@ services:
       KONG_PG_PASSWORD: kong
       KONG_CASSANDRA_CONTACT_POINTS: kong-db
     command: "kong migrations bootstrap"
-    restart: on-failure
 
   kong:
     image: kong:latest
     container_name: kong
+    restart: always
     depends_on:
       - kong-migrations
     environment:
@@ -44,18 +46,17 @@ services:
       - "8443:8443"
       - "127.0.0.1:8001:8001"
       - "127.0.0.1:8444:8444"
-    restart: always
 
   konga:
     image: pantsel/konga
     container_name: konga
+    restart: always
     depends_on:
       - kong
     environment:
       NODE_ENV: production
     ports:
       - "1337:1337"
-    restart: always
 
 volumes:
   kong-db-data:

@@ -11,47 +11,47 @@ This is a simple guide to run a MariaDB instance with phpMyAdmin web interface u
 
 **MariaDB:**
 - Root User:
-  - Username: root
-  - Password: root
+  - Username: `root`
+  - Password: `root`
 - Application User:
-  - Username: admin
-  - Password: admin
-- Default Database: lab_mariadb
-- Port: 3306
+  - Username: `admin`
+  - Password: `admin`
+- Default Database: `lab_mariadb`
+- Port: `3306`
 
 **phpMyAdmin:**
 - URL: http://localhost:8080
 - Login with MariaDB credentials:
-  - Username: root
-  - Password: root
+  - Username: `root`
+  - Password: `root`
 
 ## How to Use
 
 1. **Start the services:**
 
-```bash
-docker-compose up -d
-```
+   ```bash
+   docker-compose up -d
+   ```
 
 2. **Access phpMyAdmin:**
    
-   Open your browser and go to: http://localhost:8080
+   - Open your browser and go to: http://localhost:8080
 
 3. **Connect to MariaDB from your application:**
 
-```
-Host: localhost
-Port: 3306
-Database: lab_mariadb
-Username: admin
-Password: admin
-```
+   ```
+   Host: localhost
+   Port: 3306
+   Database: lab_mariadb
+   Username: admin
+   Password: admin
+   ```
 
 4. **Stop the services:**
 
-```bash
-docker-compose down
-```
+   ```bash
+   docker-compose down
+   ```
 
 ## Data Persistence
 

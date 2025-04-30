@@ -11,8 +11,8 @@ This is a simple guide to run a Splunk Enterprise instance using Docker Compose.
 
 **Splunk Web Interface:**
 - URL: http://localhost:8000
-- Username: admin
-- Password: changeme
+- Username: `admin`
+- Password: `changeme`
 
 **Exposed Ports:**
 - 8000: Web Interface
@@ -24,19 +24,18 @@ This is a simple guide to run a Splunk Enterprise instance using Docker Compose.
 
 1. **Start the service:**
 
-```bash
-docker-compose up -d
-```
+    ```bash
+    docker-compose up -d
+    ```
 
 2. **Access Splunk Web Interface:**
    
-   Open your browser and go to: http://localhost:8000
-   
-   Log in with the credentials mentioned above.
+   - Open your browser and go to: http://localhost:8000
+   - Log in with the credentials mentioned above.
 
 3. **Send data to Splunk:**
 
-   - **Using HTTP Event Collector (HEC):** 
+    - **Using HTTP Event Collector (HEC):** 
      Configure HEC token in Splunk Web interface, then send data to `http://localhost:8088/services/collector`
    
    - **Using Splunk Forwarders:** 
@@ -44,9 +43,9 @@ docker-compose up -d
 
 4. **Stop the service:**
 
-```bash
-docker-compose down
-```
+    ```bash
+    docker-compose down
+    ```
 
 ## Data Persistence
 
@@ -56,7 +55,7 @@ Splunk data is persisted in a Docker volume called `splunk_data`. This ensures y
 
 This setup is intended for local development. For production environments, consider:
 
-1. Changing the default password immediately
+1. Changing the default password (`SPLUNK_PASSWORD`) immediately
 2. Using a stronger password than the default
 3. Storing sensitive information in environment variables or Docker secrets
 4. Implementing proper network security to restrict access to Splunk ports

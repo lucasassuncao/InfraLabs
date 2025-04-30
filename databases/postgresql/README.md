@@ -10,61 +10,60 @@ This is a simple guide to run a PostgreSQL instance with pgAdmin web interface u
 ## Default Credentials
 
 **PostgreSQL:**
-- Username: admin
-- Password: admin
-- Default Database: mydatabase
-- Port: 5432
+- Username: `admin`
+- Password: `admin`
+- Default Database: `mydatabase`
+- Port: `5432`
 
 **pgAdmin:**
 - URL: http://localhost:5050
 - Login credentials:
-  - Email: admin@admin.com
-  - Password: admin
+  - Email: `admin@admin.com`
+  - Password: `admin`
 
 ## How to Use
 
 1. **Start the services:**
 
-```bash
-docker-compose up -d
-```
+   ```bash
+   docker-compose up -d
+   ```
 
-2. **Access pgAdmin:**
-   
-   Open your browser and go to: http://localhost:5050
-   
-   Log in with the pgAdmin credentials mentioned above.
+2. **Access pgAdmin:**   
+
+   - Open your browser and go to: http://localhost:5050
+   - Log in with the pgAdmin credentials mentioned above.
 
 3. **Connect to PostgreSQL via pgAdmin:**
    
-   After logging into pgAdmin:
+   - After logging into pgAdmin:
    
-   a. Right-click on "Servers" in the left panel and select "Create" > "Server"
+     1. Right-click on "Servers" in the left panel and select "Create" > "Server"
    
-   b. In the "General" tab, give your connection a name (e.g., "Local PostgreSQL")
+     2. In the "General" tab, give your connection a name (e.g., "Local PostgreSQL")
    
-   c. In the "Connection" tab, enter:
-      - Host name/address: postgres
-      - Port: 5432
-      - Maintenance database: mydatabase
-      - Username: admin
-      - Password: admin
+     3. In the "Connection" tab, enter:
+        - Host name/address: postgres
+        - Port: 5432
+        - Maintenance database: mydatabase
+        - Username: admin
+        - Password: admin
 
 4. **Connect to PostgreSQL from your application:**
 
-```
-Host: localhost
-Port: 5432
-Database: mydatabase
-Username: admin
-Password: admin
-```
+   ```
+   Host: localhost
+   Port: 5432
+   Database: mydatabase
+   Username: admin
+   Password: admin
+   ```
 
 5. **Stop the services:**
 
-```bash
-docker-compose down
-```
+   ```bash
+   docker-compose down
+   ```
 
 ## Data Persistence
 
