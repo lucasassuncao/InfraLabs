@@ -1,0 +1,57 @@
+// ── Alloy self-metrics ──────────────────────────────────────────────────────
+prometheus.exporter.self "alloy" {}
+
+prometheus.scrape "alloy_self" {
+  targets    = prometheus.exporter.self.alloy.targets
+  forward_to = [prometheus.remote_write.mimir.receiver]
+}
+
+// ── Remote write → Mimir (LGTM stack) ───────────────────────────────────────
+// Requires the LGTM stack to be running (make up-lgtm).
+// To disable, comment out this block and the forward_to references above.
+prometheus.remote_write "mimir" {
+  endpoint {
+    url = "http://host.docker.internal:9009/api/v1/push"
+  }
+}
+
+// ── OTLP receiver ───────────────────────────────────────────────────────────
+otelcol.receiver.otlp "default" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+  http {
+    endpoint = "0.0.0.0:4318"
+  }
+  output {
+    metrics = [otelcol.exporter.prometheus.default.input]
+    logs    = [otelcol.exporter.loki.default.input]
+    traces  = [otelcol.exporter.otlp.tempo.input]
+  }
+}
+
+// ── Metrics: OTLP → Prometheus remote_write ──────────────────────────────────
+otelcol.exporter.prometheus "default" {
+  forward_to = [prometheus.remote_write.mimir.receiver]
+}
+
+// ── Logs: OTLP → Loki ────────────────────────────────────────────────────────
+otelcol.exporter.loki "default" {
+  forward_to = [loki.write.lgtm.receiver]
+}
+
+loki.write "lgtm" {
+  endpoint {
+    url = "http://host.docker.internal:3101/loki/api/v1/push"
+  }
+}
+
+// ── Traces: OTLP → Tempo ─────────────────────────────────────────────────────
+otelcol.exporter.otlp "tempo" {
+  client {
+    endpoint = "host.docker.internal:4319"
+    tls {
+      insecure = true
+    }
+  }
+}

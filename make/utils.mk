@@ -11,14 +11,14 @@ logs:
 	docker compose -f $(STACK)/docker-compose.yml logs -f --tail=100
 
 health:
-	@echo "$(CYAN)── Container health status ─────────────────────────────$(RESET)"
+	@echo "$(CYAN)-- Container health status -----------------------------$(RESET)"
 	@docker ps --format "table {{.Names}}\t{{.Status}}" | grep -v "^NAMES"
 
 urls:
 	@echo ""
-	@echo "$(CYAN)╔══════════════════════════════════════════════════════════╗$(RESET)"
-	@echo "$(CYAN)║                   Service URLs                          ║$(RESET)"
-	@echo "$(CYAN)╚══════════════════════════════════════════════════════════╝$(RESET)"
+	@echo "$(CYAN)+==========================================================╗$(RESET)"
+	@echo "$(CYAN)|                   Service URLs                          |$(RESET)"
+	@echo "$(CYAN)+==========================================================╝$(RESET)"
 	@echo "$(GREEN)Prometheus Stack$(RESET)"
 	@echo "  Grafana          http://localhost:3000      admin/admin"
 	@echo "  Prometheus       http://localhost:9090"
@@ -49,6 +49,11 @@ urls:
 	@echo "  OTel GRPC        localhost:4317"
 	@echo "  OTel HTTP        localhost:4318"
 	@echo "  zPages           http://localhost:55679/debug/tracez"
+	@echo ""
+	@echo "$(GREEN)Alloy$(RESET)"
+	@echo "  Alloy UI         http://localhost:12345"
+	@echo "  OTLP gRPC        localhost:4321"
+	@echo "  OTLP HTTP        localhost:4322"
 	@echo ""
 	@echo "$(GREEN)Databases$(RESET)"
 	@echo "  pgAdmin          http://localhost:5050      admin@admin.com/admin"
@@ -106,9 +111,9 @@ urls:
 	@echo ""
 
 nuke:
-	@echo "$(RED)⚠ This will remove ALL containers, volumes and networks!$(RESET)"
+	@echo "$(RED)!! This will remove ALL containers, volumes and networks!$(RESET)"
 	@read -p "Are you sure? [y/N] " confirm && [ "$$confirm" = "y" ] || exit 1
 	@$(MAKE) down-all
 	docker volume prune -f
 	docker network prune -f
-	@echo "$(GREEN)✔ Done.$(RESET)"
+	@echo "$(GREEN)ok Done.$(RESET)"

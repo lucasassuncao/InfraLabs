@@ -6,10 +6,10 @@
         down-databases down-postgresql down-mysql down-mariadb down-redis down-mongodb \
         down-cassandra down-minio down-elasticsearch down-meilisearch
 
-# ── UP ───────────────────────────────────────────────────────
+# -- UP -------------------------------------------------------
 
 up-databases:
-	@echo "$(CYAN)▶ Starting all Databases...$(RESET)"
+	@echo "$(CYAN)>> Starting all Databases...$(RESET)"
 	docker compose -f databases/postgresql/docker-compose.yml up -d
 	docker compose -f databases/mysql/docker-compose.yml up -d
 	docker compose -f databases/mariadb/docker-compose.yml up -d
@@ -21,59 +21,59 @@ up-databases:
 	docker compose -f databases/meilisearch/docker-compose.yml up -d
 
 up-postgresql:
-	@echo "$(CYAN)▶ Starting PostgreSQL...$(RESET)"
+	@echo "$(CYAN)>> Starting PostgreSQL...$(RESET)"
 	docker compose -f databases/postgresql/docker-compose.yml up -d
-	@echo "$(GREEN)✔ pgAdmin:     http://localhost:5050  (admin@admin.com/admin)$(RESET)"
-	@echo "$(GREEN)✔ PostgreSQL:  localhost:5432  (admin/admin)$(RESET)"
+	@echo "$(GREEN)ok pgAdmin:     http://localhost:5050  (admin@admin.com/admin)$(RESET)"
+	@echo "$(GREEN)ok PostgreSQL:  localhost:5432  (admin/admin)$(RESET)"
 
 up-mysql:
-	@echo "$(CYAN)▶ Starting MySQL...$(RESET)"
+	@echo "$(CYAN)>> Starting MySQL...$(RESET)"
 	docker compose -f databases/mysql/docker-compose.yml up -d
-	@echo "$(GREEN)✔ MySQL:       localhost:3306  (admin/admin)$(RESET)"
-	@echo "$(GREEN)✔ phpMyAdmin:  http://localhost:5051$(RESET)"
+	@echo "$(GREEN)ok MySQL:       localhost:3306  (admin/admin)$(RESET)"
+	@echo "$(GREEN)ok phpMyAdmin:  http://localhost:5051$(RESET)"
 
 up-mariadb:
-	@echo "$(CYAN)▶ Starting MariaDB...$(RESET)"
+	@echo "$(CYAN)>> Starting MariaDB...$(RESET)"
 	docker compose -f databases/mariadb/docker-compose.yml up -d
-	@echo "$(GREEN)✔ MariaDB:     localhost:3307  (admin/admin)$(RESET)"
-	@echo "$(GREEN)✔ phpMyAdmin:  http://localhost:5052$(RESET)"
+	@echo "$(GREEN)ok MariaDB:     localhost:3307  (admin/admin)$(RESET)"
+	@echo "$(GREEN)ok phpMyAdmin:  http://localhost:5052$(RESET)"
 
 up-redis:
-	@echo "$(CYAN)▶ Starting Redis...$(RESET)"
+	@echo "$(CYAN)>> Starting Redis...$(RESET)"
 	docker compose -f databases/redis/docker-compose.yml up -d
-	@echo "$(GREEN)✔ Redis:         localhost:6379  (password: admin)$(RESET)"
-	@echo "$(GREEN)✔ RedisInsight:  http://localhost:5540$(RESET)"
+	@echo "$(GREEN)ok Redis:         localhost:6379  (password: admin)$(RESET)"
+	@echo "$(GREEN)ok RedisInsight:  http://localhost:5540$(RESET)"
 
 up-mongodb:
-	@echo "$(CYAN)▶ Starting MongoDB...$(RESET)"
+	@echo "$(CYAN)>> Starting MongoDB...$(RESET)"
 	docker compose -f databases/mongodb/docker-compose.yml up -d
-	@echo "$(GREEN)✔ MongoDB:       localhost:27017  (admin/admin)$(RESET)"
-	@echo "$(GREEN)✔ Mongo Express: http://localhost:8082  (admin/admin)$(RESET)"
+	@echo "$(GREEN)ok MongoDB:       localhost:27017  (admin/admin)$(RESET)"
+	@echo "$(GREEN)ok Mongo Express: http://localhost:8082  (admin/admin)$(RESET)"
 
 up-cassandra:
-	@echo "$(CYAN)▶ Starting Cassandra...$(RESET)"
+	@echo "$(CYAN)>> Starting Cassandra...$(RESET)"
 	docker compose -f databases/cassandra/docker-compose.yml up -d
-	@echo "$(GREEN)✔ Cassandra CQL:  localhost:9042$(RESET)"
+	@echo "$(GREEN)ok Cassandra CQL:  localhost:9042$(RESET)"
 	@echo "$(YELLOW)  Connect: docker exec -it cassandra cqlsh$(RESET)"
 
 up-minio:
-	@echo "$(CYAN)▶ Starting MinIO...$(RESET)"
+	@echo "$(CYAN)>> Starting MinIO...$(RESET)"
 	docker compose -f databases/minio/docker-compose.yml up -d
-	@echo "$(GREEN)✔ MinIO S3 API:  http://localhost:9000  (admin/admin123)$(RESET)"
-	@echo "$(GREEN)✔ MinIO Console: http://localhost:9001  (admin/admin123)$(RESET)"
+	@echo "$(GREEN)ok MinIO S3 API:  http://localhost:9000  (admin/admin123)$(RESET)"
+	@echo "$(GREEN)ok MinIO Console: http://localhost:9001  (admin/admin123)$(RESET)"
 
 up-elasticsearch:
-	@echo "$(CYAN)▶ Starting Elasticsearch standalone...$(RESET)"
+	@echo "$(CYAN)>> Starting Elasticsearch standalone...$(RESET)"
 	docker compose -f databases/elasticsearch/docker-compose.yml up -d
-	@echo "$(GREEN)✔ Elasticsearch: http://localhost:9201$(RESET)"
-	@echo "$(GREEN)✔ Dejavu UI:     http://localhost:1358$(RESET)"
+	@echo "$(GREEN)ok Elasticsearch: http://localhost:9201$(RESET)"
+	@echo "$(GREEN)ok Dejavu UI:     http://localhost:1358$(RESET)"
 
 up-meilisearch:
-	@echo "$(CYAN)▶ Starting Meilisearch...$(RESET)"
+	@echo "$(CYAN)>> Starting Meilisearch...$(RESET)"
 	docker compose -f databases/meilisearch/docker-compose.yml up -d
-	@echo "$(GREEN)✔ Meilisearch UI/API: http://localhost:7700  (masterkey)$(RESET)"
+	@echo "$(GREEN)ok Meilisearch UI/API: http://localhost:7700  (masterkey)$(RESET)"
 
-# ── DOWN ─────────────────────────────────────────────────────
+# -- DOWN -----------------------------------------------------
 
 down-databases:
 	docker compose -f databases/postgresql/docker-compose.yml down

@@ -1,0 +1,27 @@
+name: alloy
+
+networks:
+  alloy:
+    driver: bridge
+
+services:
+  # ─── Grafana Alloy ────────────────────────────────────────────
+  alloy:
+    image: grafana/alloy:latest
+    container_name: alloy
+    restart: unless-stopped
+    ports:
+      - "12345:12345"   # Alloy UI
+      - "4321:4317"     # OTLP gRPC  (host 4321 → avoids conflict with OTel/Tempo)
+      - "4322:4318"     # OTLP HTTP  (host 4322 → avoids conflict with OTel/Tempo)
+    volumes:
+      - ./config/config.alloy:/etc/alloy/config.alloy:ro
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --stability.level=generally-available
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - alloy

@@ -30,7 +30,8 @@ devops-stacks/
 │   ├── lgtm/                 # Loki + Grafana + Tempo + Mimir
 │   ├── elk/                  # Elasticsearch + Logstash + Kibana + Filebeat
 │   ├── splunk/               # Splunk Enterprise + Universal Forwarder
-│   └── otel/                 # OTel Collector + Jaeger + Zipkin
+│   ├── otel/                 # OTel Collector + Jaeger + Zipkin
+│   └── alloy/                # Grafana Alloy (OpenTelemetry pipeline)
 ├── databases/
 │   ├── postgresql/           # PostgreSQL + pgAdmin
 │   ├── mysql/                # MySQL + phpMyAdmin
@@ -203,6 +204,7 @@ OpenTelemetry Collector + Jaeger + Zipkin.
 
 ```bash
 make up-otel
+make up-alloy
 ```
 
 | Service | URL | Credentials |
@@ -220,6 +222,22 @@ curl -X POST http://localhost:4318/v1/traces \
   -H 'Content-Type: application/json' \
   -d @trace-payload.json
 ```
+
+#### Alloy
+
+Grafana Alloy — an OpenTelemetry-compatible pipeline with a River-based configuration language. Receives OTLP telemetry and forwards metrics to Mimir, logs to Loki, and traces to Tempo (requires the LGTM stack to be running).
+
+```bash
+make up-alloy
+```
+
+| Service | URL | Credentials |
+|---|---|---|
+| Alloy UI | http://localhost:12345 | — |
+| OTLP gRPC | localhost:4321 | — |
+| OTLP HTTP | localhost:4322 | — |
+
+> The config at `observability/alloy/config/config.alloy` forwards to the LGTM stack (`make up-lgtm`). If LGTM is not running, Alloy will log errors for the remote_write endpoints but continue operating.
 
 ---
 
