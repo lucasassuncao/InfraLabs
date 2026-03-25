@@ -1,0 +1,51 @@
+name: nats
+
+networks:
+  nats:
+    driver: bridge
+
+services:
+  # ─── NATS ─────────────────────────────────────────────────
+  nats:
+    image: nats:alpine
+    container_name: nats
+    restart: unless-stopped
+    ports:
+      - "4222:4222"   # Client connections
+      - "8222:8222"   # HTTP monitoring
+      - "6222:6222"   # Cluster routing
+    command:
+      - "--name=dev-nats"
+      - "--http_port=8222"
+      - "--jetstream"
+      - "--store_dir=/data"
+    volumes:
+      - nats_data:/data
+    networks:
+      - nats
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8222/healthz | grep -q 'ok'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── NATS Surveyor (Monitoring UI) ────────────────────────
+  nats-surveyor:
+    image: natsio/prometheus-nats-exporter:latest
+    container_name: nats-surveyor
+    restart: unless-stopped
+    ports:
+      - "7777:7777"   # Prometheus metrics
+    command:
+      - "-port=7777"
+      - "-varz"
+      - "-jsz=all"
+      - "http://nats:8222"
+    depends_on:
+      nats:
+        condition: service_healthy
+    networks:
+      - nats
+
+volumes:
+  nats_data:

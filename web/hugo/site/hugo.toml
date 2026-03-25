@@ -1,0 +1,9 @@
+baseURL       = "http://localhost:1313/"
+languageCode  = "pt-br"
+title         = "Hugo Dev Site"
+
+[markup.highlight]
+  style = "monokai"
+
+[params]
+  description = "Local Hugo dev environment"

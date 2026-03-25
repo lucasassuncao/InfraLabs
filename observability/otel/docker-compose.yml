@@ -1,0 +1,49 @@
+name: otel
+
+networks:
+  otel:
+    driver: bridge
+
+services:
+  # ─── OpenTelemetry Collector ──────────────────────────────
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    restart: unless-stopped
+    ports:
+      - "4317:4317"    # OTLP gRPC receiver
+      - "4318:4318"    # OTLP HTTP receiver
+      - "8888:8888"    # Collector metrics
+      - "8889:8889"    # Prometheus exporter
+      - "13133:13133"  # Health check
+      - "55679:55679"  # zPages (debug UI)
+    volumes:
+      - ./config/otel-collector.yml:/etc/otelcol-contrib/config.yaml:ro
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    networks:
+      - otel
+
+  # ─── Jaeger (Tracing backend) ─────────────────────────────
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    restart: unless-stopped
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14250:14250"  # gRPC (model.proto)
+      - "14268:14268"  # HTTP thrift
+      - "6831:6831/udp"  # Compact thrift
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - otel
+
+  # ─── Zipkin (Alternative tracing) ────────────────────────
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    restart: unless-stopped
+    ports:
+      - "9411:9411"
+    networks:
+      - otel

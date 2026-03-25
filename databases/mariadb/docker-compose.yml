@@ -1,37 +1,50 @@
-services:
-  mariadb:
-    image: mariadb:11
-    container_name: mariadb
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: lab_mariadb
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
-    ports:
-      - "3306:3306"
-    volumes:
-      - mariadb_data:/var/lib/mysql
-    networks:
-      - mariadb_network
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2.2
-    container_name: phpmyadmin
-    restart: unless-stopped
-    environment:
-      PMA_HOST: mariadb
-      PMA_USER: root
-      PMA_PASSWORD: root
-    ports:
-      - "8080:80"
-    depends_on:
-      - mariadb
-    networks:
-      - mariadb_network
+name: mariadb
 
 volumes:
   mariadb_data:
 
 networks:
-  mariadb_network:
+  mariadb:
+    driver: bridge
+
+services:
+  # ─── MariaDB ──────────────────────────────────────────────
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: admin
+      MARIADB_DATABASE: devdb
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - mariadb
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── phpMyAdmin ───────────────────────────────────────────
+  phpmyadmin-mariadb:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin-mariadb
+    restart: unless-stopped
+    ports:
+      - "5052:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: admin
+      PMA_PASSWORD: admin
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - mariadb

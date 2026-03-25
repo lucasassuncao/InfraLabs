@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS app;
+
+CREATE USER IF NOT EXISTS 'readonly'@'%' IDENTIFIED BY 'readonly';
+GRANT SELECT ON lempdb.* TO 'readonly'@'%';
+FLUSH PRIVILEGES;

@@ -1,0 +1,74 @@
+name: lgtm
+
+volumes:
+  mimir_data:
+  tempo_data:
+  lgtm_grafana_data:
+  lgtm_loki_data:
+
+networks:
+  lgtm:
+    driver: bridge
+
+services:
+  # ─── Grafana ──────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    container_name: lgtm-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    volumes:
+      - lgtm_grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
+    networks:
+      - lgtm
+
+  # ─── Loki ─────────────────────────────────────────────────
+  loki:
+    image: grafana/loki:latest
+    container_name: lgtm-loki
+    restart: unless-stopped
+    ports:
+      - "3101:3100"
+    volumes:
+      - lgtm_loki_data:/loki
+      - ./config/loki.yml:/etc/loki/local-config.yaml:ro
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - lgtm
+
+  # ─── Tempo ────────────────────────────────────────────────
+  tempo:
+    image: grafana/tempo:2.4.2
+    container_name: lgtm-tempo
+    restart: unless-stopped
+    ports:
+      - "3200:3200"   # Tempo HTTP
+      - "4319:4317"   # OTLP gRPC (4317 reserved for otel stack)
+      - "4320:4318"   # OTLP HTTP (4318 reserved for otel stack)
+    volumes:
+      - tempo_data:/tmp/tempo
+      - ./config/tempo.yml:/etc/tempo.yaml:ro
+    command: -config.file=/etc/tempo.yaml
+    networks:
+      - lgtm
+
+  # ─── Mimir ────────────────────────────────────────────────
+  mimir:
+    image: grafana/mimir:latest
+    container_name: lgtm-mimir
+    restart: unless-stopped
+    ports:
+      - "9009:9009"
+    volumes:
+      - mimir_data:/data
+      - ./config/mimir.yml:/etc/mimir/mimir.yaml:ro
+    command: --config.file=/etc/mimir/mimir.yaml
+    networks:
+      - lgtm

@@ -1,0 +1,41 @@
+name: uptime-kuma
+
+volumes:
+  uptime_kuma_data:
+
+networks:
+  uptime-kuma:
+    driver: bridge
+
+services:
+  # ─── Uptime Kuma ──────────────────────────────────────────
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3002:3001"
+    volumes:
+      - uptime_kuma_data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - uptime-kuma
+
+  # ─── Init (creates admin account + all monitors) ──────────
+  uptime-kuma-init:
+    image: python:3.12-alpine
+    container_name: uptime-kuma-init
+    restart: "no"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./init/setup.py:/setup.py:ro
+    command: >
+      sh -c "pip install uptime-kuma-api==1.2.1 --quiet && python /setup.py"
+    depends_on:
+      uptime-kuma:
+        condition: service_started
+    networks:
+      - uptime-kuma

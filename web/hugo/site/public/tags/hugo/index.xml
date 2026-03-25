@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on Hugo Dev Site</title>
+    <link>http://localhost:1313/tags/hugo/</link>
+    <description>Recent content in Hugo on Hugo Dev Site</description>
+    <generator>Hugo</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;&#xA;&lt;p&gt;This is your first Hugo post. Edit this file or create new ones in &lt;code&gt;content/posts/&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new post&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker exec -it hugo hugo new posts/my-post.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;meilisearch-integration&#34;&gt;Meilisearch integration&lt;/h2&gt;&#xA;&lt;p&gt;You can connect Meilisearch running at &lt;code&gt;http://localhost:7700&lt;/code&gt; to add search to this site.&lt;/p&gt;&#xA;&lt;p&gt;Use the &lt;a href=&#34;https://github.com/meilisearch/meilisearch-js&#34;&gt;Meilisearch JS client&lt;/a&gt; in your Hugo templates or a search widget.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,39 @@
+name: redis
+
+volumes:
+  redis_data:
+
+networks:
+  redis:
+    driver: bridge
+
+services:
+  # ─── Redis ────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass admin
+    volumes:
+      - redis_data:/data
+    networks:
+      - redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "admin", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis-insight
+    restart: unless-stopped
+    ports:
+      - "5540:5540"
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - redis

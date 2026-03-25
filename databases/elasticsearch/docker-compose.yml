@@ -1,0 +1,51 @@
+name: elasticsearch
+
+volumes:
+  elasticsearch_standalone_data:
+
+networks:
+  elasticsearch:
+    driver: bridge
+
+services:
+  # ─── Elasticsearch ────────────────────────────────────────
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    container_name: elasticsearch-standalone
+    restart: unless-stopped
+    ports:
+      - "9201:9200"   # REST API  (9200 reserved for ELK stack)
+      - "9301:9300"   # Transport (9300 reserved for ELK stack)
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - cluster.name=standalone-cluster
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_standalone_data:/usr/share/elasticsearch/data
+    networks:
+      - elasticsearch
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ─── Dejavu (Elasticsearch UI) ────────────────────────────
+  dejavu:
+    image: appbaseio/dejavu:latest
+    container_name: dejavu
+    restart: unless-stopped
+    ports:
+      - "1358:1358"   # Web UI
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - elasticsearch

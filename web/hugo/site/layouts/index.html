@@ -1,0 +1,20 @@
+{{ define "title" }}{{ .Site.Title }} — Home{{ end }}
+
+{{ define "main" }}
+<h1>{{ .Site.Title }}</h1>
+<p>{{ .Site.Params.description }}</p>
+
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ if $posts }}
+<h2>Posts</h2>
+<ul>
+  {{ range $posts }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span style="color:#475569; font-size:.85rem;"> — {{ .Date.Format "02 Jan 2006" }}</span>
+    {{ range .Params.tags }}<span class="tag">{{ . }}</span> {{ end }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

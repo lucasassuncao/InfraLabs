@@ -1,0 +1,20 @@
+name: hugo
+
+networks:
+  hugo:
+    driver: bridge
+
+services:
+  # ─── Hugo (Static Site Generator) ────────────────────────
+  hugo:
+    image: hugomods/hugo:latest
+    container_name: hugo
+    restart: unless-stopped
+    ports:
+      - "1313:1313"   # Dev server with live reload
+    volumes:
+      - ./site:/src
+    working_dir: /src
+    command: server --bind=0.0.0.0 --port=1313 --buildDrafts --navigateToChanged
+    networks:
+      - hugo
